@@ -1,0 +1,481 @@
+generator client {
+  provider     = "prisma-client-js"
+  output       = "./generated"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================================
+// CONFIGURATION / LOOKUP TABLES (dynamic, seed-driven, no hardcoding)
+// ============================================================
+
+// SystemCode — generic reusable lookup table for every fixed-vocabulary
+// status/period/type/role field across the app (see table above for full mapping).
+model SystemCode {
+  id          String   @id @default(uuid())
+  domain      String // e.g. "USER_STATUS", "TRANSACTION_STATUS", "GOAL_TYPE"
+  code        String // e.g. "ACTIVE", "PENDING", "SAVINGS"
+  name        String // display label
+  description String?
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  metadata    Json? // optional domain-specific config, e.g. {"isTerminal": true}
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Back-relations — one per entity field that points into this table
+  usersStatus              User[]               @relation("UserStatus")
+  transactionsStatus       Transaction[]        @relation("TransactionStatus")
+  budgetsPeriod            Budget[]             @relation("BudgetPeriod")
+  budgetsStatus            Budget[]             @relation("BudgetStatus")
+  goalsStatus              Goal[]               @relation("GoalStatus")
+  goalsType                Goal[]               @relation("GoalType")
+  sharedWalletInviteStatus SharedWalletAccess[] @relation("InviteStatus")
+  chatMessagesRole         ChatMessage[]        @relation("ChatRole")
+  subscriptionsStatus      Subscription[]       @relation("SubscriptionStatus")
+  invoicesStatus           Invoice[]            @relation("InvoiceStatus")
+
+  @@unique([domain, code])
+}
+
+// Currency — replaces hardcoded "USD" defaults throughout the schema
+model Currency {
+  code           String   @id // ISO 4217, e.g. "USD", "IDR"
+  name           String
+  symbol         String
+  decimalPlaces  Int      @default(2)
+  isActive       Boolean  @default(true)
+  isBaseCurrency Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  users         User[]         @relation("PreferredCurrency")
+  wallets       Wallet[]
+  transactions  Transaction[]
+  goals         Goal[]
+  subscriptions Subscription[]
+  invoices      Invoice[]
+  plans         Plan[]
+  ratesFrom     ExchangeRate[] @relation("FromCurrency")
+  ratesTo       ExchangeRate[] @relation("ToCurrency")
+}
+
+// Exchange rates — supports FR-MC-03 (real-time currency conversion) without code changes
+model ExchangeRate {
+  id           String   @id @default(uuid())
+  fromCurrency String
+  from         Currency @relation("FromCurrency", fields: [fromCurrency], references: [code])
+  toCurrency   String
+  to           Currency @relation("ToCurrency", fields: [toCurrency], references: [code])
+  rate         Decimal
+  fetchedAt    DateTime @default(now())
+  source       String? // e.g. "OpenExchangeRates"
+
+  @@index([fromCurrency, toCurrency, fetchedAt])
+}
+
+// Role — replaces the UserRole enum
+model Role {
+  id          String   @id @default(uuid())
+  code        String   @unique // e.g. "OWNER", "ADMIN", "FINANCE_MANAGER"
+  name        String
+  description String?
+  isSystem    Boolean  @default(false) // system roles cannot be deleted via admin UI
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  users       User[]
+  permissions RolePermission[]
+}
+
+// Permission — replaces the Permission enum
+model Permission {
+  id          String  @id @default(uuid())
+  code        String  @unique // e.g. "VIEW", "ADD_TRANSACTION", "MANAGE_WALLET"
+  name        String
+  description String?
+
+  roles         RolePermission[]
+  userWallets   UserWalletPermission[]
+  sharedWallets SharedWalletPermission[]
+}
+
+// Role <-> Permission (many-to-many)
+model RolePermission {
+  roleId       String
+  role         Role       @relation(fields: [roleId], references: [id])
+  permissionId String
+  permission   Permission @relation(fields: [permissionId], references: [id])
+
+  @@id([roleId, permissionId])
+}
+
+// WalletType — replaces the WalletType enum
+model WalletType {
+  id          String  @id @default(uuid())
+  code        String  @unique // e.g. "PERSONAL", "BUSINESS", "JOINT", "SAVINGS"
+  name        String
+  description String?
+  isActive    Boolean @default(true)
+
+  wallets Wallet[]
+}
+
+// TransactionType — replaces the TransactionType enum
+model TransactionType {
+  id        String  @id @default(uuid())
+  code      String  @unique // e.g. "INCOME", "EXPENSE", "TRANSFER"
+  name      String
+  direction Int // +1 credits the wallet, -1 debits it — drives balance calculation
+  isActive  Boolean @default(true)
+
+  transactions Transaction[]
+}
+
+// Category — replaces free-text category/subCategory strings; self-referencing for subcategories
+model Category {
+  id        String     @id @default(uuid())
+  name      String
+  icon      String?
+  color     String?
+  parentId  String?
+  parent    Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children  Category[] @relation("CategoryHierarchy")
+  userId    String? // null = system default category, set = user-created custom category
+  user      User?      @relation(fields: [userId], references: [id])
+  isActive  Boolean    @default(true)
+  createdAt DateTime   @default(now())
+
+  transactions Transaction[]
+  budgets      Budget[]
+
+  @@index([userId])
+}
+
+// NotificationType — replaces the NotificationType enum
+model NotificationType {
+  id             String  @id @default(uuid())
+  code           String  @unique // e.g. "LOW_BALANCE", "LARGE_TRANSACTION"
+  name           String
+  description    String?
+  defaultChannel String  @default("EMAIL") // EMAIL, PUSH, SMS — extendable without a migration
+  isActive       Boolean @default(true)
+
+  notifications Notification[]
+}
+
+// Plan — replaces the SubscriptionPlan enum + the hardcoded pricing table in Section 4.5
+model Plan {
+  id            String   @id @default(uuid())
+  code          String   @unique // e.g. "FREE", "PRO", "BUSINESS", "ENTERPRISE"
+  name          String
+  price         Decimal
+  currencyCode  String
+  currency      Currency @relation(fields: [currencyCode], references: [code])
+  billingPeriod String   @default("MONTHLY") // MONTHLY, YEARLY — extendable without a migration
+  features      Json // feature flags/limits, e.g. {"maxWallets": 5, "aiChat": true}
+  sortOrder     Int      @default(0)
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  subscriptions Subscription[]
+}
+
+// ============================================================
+// CORE DOMAIN MODELS
+// ============================================================
+
+// User Model
+model User {
+  id                    String     @id @default(uuid())
+  email                 String     @unique
+  passwordHash          String
+  name                  String
+  roleId                String
+  role                  Role       @relation(fields: [roleId], references: [id])
+  statusId              String
+  status                SystemCode @relation("UserStatus", fields: [statusId], references: [id])
+  preferredCurrencyCode String     @default("USD")
+  preferredCurrency     Currency   @relation("PreferredCurrency", fields: [preferredCurrencyCode], references: [code])
+  emailVerified         Boolean    @default(false)
+  createdAt             DateTime   @default(now())
+  updatedAt             DateTime   @updatedAt
+
+  userWallets   UserWallet[]
+  transactions  Transaction[]
+  budgets       Budget[]
+  goals         Goal[]
+  notifications Notification[]
+  chatHistory   ChatMessage[]
+  subscriptions Subscription[]
+  sharedWallets SharedWalletAccess[]
+  categories    Category[]
+  invoices      Invoice[]
+  auditLogs     AuditLog[]
+  wallets       Wallet[]
+}
+
+// Wallet Model
+model Wallet {
+  id           String               @id @default(uuid())
+  name         String
+  currencyCode String
+  currency     Currency             @relation(fields: [currencyCode], references: [code])
+  balance      Decimal              @default(0)
+  walletTypeId String
+  walletType   WalletType           @relation(fields: [walletTypeId], references: [id])
+  ownerId      String
+  owner        User                 @relation(fields: [ownerId], references: [id])
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  transactions Transaction[]
+  userWallets  UserWallet[]
+  sharedAccess SharedWalletAccess[]
+  isActive     Boolean              @default(true)
+  description  String?
+}
+
+// UserWallet (Many-to-Many with dynamic permissions)
+model UserWallet {
+  userId      String
+  user        User                   @relation(fields: [userId], references: [id])
+  walletId    String
+  wallet      Wallet                 @relation(fields: [walletId], references: [id])
+  permissions UserWalletPermission[]
+  addedAt     DateTime               @default(now())
+
+  @@id([userId, walletId])
+}
+
+// UserWallet <-> Permission (many-to-many, replaces the old Permission[] enum array)
+model UserWalletPermission {
+  userWalletUserId   String
+  userWalletWalletId String
+  userWallet         UserWallet @relation(fields: [userWalletUserId, userWalletWalletId], references: [userId, walletId])
+  permissionId       String
+  permission         Permission @relation(fields: [permissionId], references: [id])
+
+  @@id([userWalletUserId, userWalletWalletId, permissionId])
+}
+
+// Transaction Model
+model Transaction {
+  id                String          @id @default(uuid())
+  walletId          String
+  wallet            Wallet          @relation(fields: [walletId], references: [id])
+  userId            String
+  user              User            @relation(fields: [userId], references: [id])
+  amount            Decimal
+  currencyCode      String
+  currency          Currency        @relation(fields: [currencyCode], references: [code])
+  transactionTypeId String
+  transactionType   TransactionType @relation(fields: [transactionTypeId], references: [id])
+  categoryId        String?
+  category          Category?       @relation(fields: [categoryId], references: [id])
+  description       String?
+  merchant          String?
+  date              DateTime
+  statusId          String
+  status            SystemCode      @relation("TransactionStatus", fields: [statusId], references: [id])
+  reference         String?
+  metadata          Json?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  attachments       Attachment[]
+  budgetId          String?
+  budget            Budget?         @relation(fields: [budgetId], references: [id])
+  isRecurring       Boolean         @default(false)
+  recurringRule     String?
+}
+
+// Budget Model
+model Budget {
+  id            String        @id @default(uuid())
+  userId        String
+  user          User          @relation(fields: [userId], references: [id])
+  name          String
+  categoryId    String
+  category      Category      @relation(fields: [categoryId], references: [id])
+  amount        Decimal
+  spent         Decimal       @default(0)
+  periodId      String
+  period        SystemCode    @relation("BudgetPeriod", fields: [periodId], references: [id])
+  startDate     DateTime
+  endDate       DateTime?
+  statusId      String
+  status        SystemCode    @relation("BudgetStatus", fields: [statusId], references: [id])
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  transactions  Transaction[]
+  notifications BudgetAlert[]
+}
+
+// Budget Alert
+model BudgetAlert {
+  id          String   @id @default(uuid())
+  budgetId    String
+  budget      Budget   @relation(fields: [budgetId], references: [id])
+  threshold   Float // percentage (e.g., 80 = 80%)
+  triggeredAt DateTime @default(now())
+  resolved    Boolean  @default(false)
+}
+
+// Goal Model
+model Goal {
+  id            String           @id @default(uuid())
+  userId        String
+  user          User             @relation(fields: [userId], references: [id])
+  name          String
+  targetAmount  Decimal
+  currentAmount Decimal          @default(0)
+  currencyCode  String           @default("USD")
+  currency      Currency         @relation(fields: [currencyCode], references: [code])
+  targetDate    DateTime
+  statusId      String
+  status        SystemCode       @relation("GoalStatus", fields: [statusId], references: [id])
+  typeId        String
+  type          SystemCode       @relation("GoalType", fields: [typeId], references: [id])
+  priority      Int              @default(1)
+  description   String?
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  simulations   GoalSimulation[]
+}
+
+// Goal Simulation
+model GoalSimulation {
+  id              String   @id @default(uuid())
+  goalId          String
+  goal            Goal     @relation(fields: [goalId], references: [id])
+  projectedDate   DateTime
+  projectedAmount Decimal
+  confidence      Float // 0-1
+  assumptions     Json
+  createdAt       DateTime @default(now())
+}
+
+// Shared Wallet Access
+model SharedWalletAccess {
+  id          String                   @id @default(uuid())
+  walletId    String
+  wallet      Wallet                   @relation(fields: [walletId], references: [id])
+  userId      String
+  user        User                     @relation(fields: [userId], references: [id])
+  permissions SharedWalletPermission[]
+  invitedBy   String
+  invitedAt   DateTime                 @default(now())
+  acceptedAt  DateTime?
+  statusId    String
+  status      SystemCode               @relation("InviteStatus", fields: [statusId], references: [id])
+}
+
+// SharedWalletAccess <-> Permission (many-to-many)
+model SharedWalletPermission {
+  sharedWalletAccessId String
+  sharedWalletAccess   SharedWalletAccess @relation(fields: [sharedWalletAccessId], references: [id])
+  permissionId         String
+  permission           Permission         @relation(fields: [permissionId], references: [id])
+
+  @@id([sharedWalletAccessId, permissionId])
+}
+
+// Chat Message
+model ChatMessage {
+  id        String     @id @default(uuid())
+  userId    String
+  user      User       @relation(fields: [userId], references: [id])
+  sessionId String
+  message   String
+  response  String?
+  roleId    String
+  role      SystemCode @relation("ChatRole", fields: [roleId], references: [id])
+  context   Json?
+  createdAt DateTime   @default(now())
+}
+
+// Subscription Model
+model Subscription {
+  id            String     @id @default(uuid())
+  userId        String
+  user          User       @relation(fields: [userId], references: [id])
+  planId        String
+  plan          Plan       @relation(fields: [planId], references: [id])
+  statusId      String
+  status        SystemCode @relation("SubscriptionStatus", fields: [statusId], references: [id])
+  startDate     DateTime   @default(now())
+  endDate       DateTime?
+  paymentMethod String?
+  paymentId     String? // Stripe/Midtrans subscription ID
+  price         Decimal // snapshot of Plan.price at time of purchase (plan price may change later)
+  currencyCode  String
+  currency      Currency   @relation(fields: [currencyCode], references: [code])
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  invoices      Invoice[]
+}
+
+// Invoice Model
+model Invoice {
+  id             String        @id @default(uuid())
+  subscriptionId String?
+  subscription   Subscription? @relation(fields: [subscriptionId], references: [id])
+  userId         String
+  user           User          @relation(fields: [userId], references: [id])
+  amount         Decimal
+  currencyCode   String
+  currency       Currency      @relation(fields: [currencyCode], references: [code])
+  dueDate        DateTime
+  paidAt         DateTime?
+  statusId       String
+  status         SystemCode    @relation("InvoiceStatus", fields: [statusId], references: [id])
+  invoiceNumber  String        @unique
+  downloadUrl    String?
+  createdAt      DateTime      @default(now())
+}
+
+// Notification Model
+model Notification {
+  id                 String           @id @default(uuid())
+  userId             String
+  user               User             @relation(fields: [userId], references: [id])
+  notificationTypeId String
+  notificationType   NotificationType @relation(fields: [notificationTypeId], references: [id])
+  title              String
+  message            String
+  data               Json?
+  read               Boolean          @default(false)
+  sentAt             DateTime         @default(now())
+  deliveredAt        DateTime?
+  emailSent          Boolean          @default(false)
+}
+
+// Attachment Model
+model Attachment {
+  id            String       @id @default(uuid())
+  transactionId String?
+  transaction   Transaction? @relation(fields: [transactionId], references: [id])
+  fileName      String
+  fileUrl       String
+  fileSize      Int
+  mimeType      String
+  uploadedBy    String
+  uploadedAt    DateTime     @default(now())
+}
+
+// Audit Log
+model AuditLog {
+  id         String   @id @default(uuid())
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id])
+  action     String
+  resource   String
+  resourceId String?
+  changes    Json?
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+}
