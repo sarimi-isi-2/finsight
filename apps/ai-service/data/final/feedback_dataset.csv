@@ -1,0 +1,65 @@
+text,predicted_label,corrected_label,is_correct
+Bayar tagihan internet,bills,bills,True
+Beli nasi goreng,food,food,True
+Pesan ayam geprek,food,food,True
+Beli sepatu online,shopping,shopping,True
+Isi saldo DANA,topup,topup,True
+Bayar tiket kereta,transport,transport,True
+Beli tiket pesawat untuk liburan,travel,travel,True
+Donasi untuk panti asuhan,donation,donation,True
+Nonton bioskop akhir pekan,entertainment,entertainment,True
+Beli tiket konser,entertainment,entertainment,True
+Bayar biaya administrasi bank,fees,fees,True
+Bayar biaya transfer bank,fees,fees,True
+Bayar pinjaman online,loan,loan,True
+Beli reksa dana,investment,investment,True
+Beli saham perusahaan,investment,investment,True
+Gaji bulan Agustus,income,income,True
+Terima uang dari pekerjaan,income,income,True
+Bayar obat di apotek,healthcare,healthcare,True
+Biaya konsultasi dokter,healthcare,healthcare,False
+Kirim uang ke rekening orang tua,transfer,transfer,True
+Bayar listrik bulanan,bills,bills,True
+Beli sepatu Nike,shopping,shopping,True
+Top up GoPay,topup,topup,True
+Naik Grab ke kampus,transport,transport,True
+Bayar uang kuliah,education,education,True
+Beli laptop baru,shopping,shopping,True
+Transfer uang ke teman,transfer,transfer,True
+Bayar cicilan motor,loan,loan,True
+Pesan hotel untuk liburan,travel,travel,True
+Donasi ke panti asuhan,donation,donation,True
+Beli kopi di kedai,shopping,food,False
+Bayar parkir kampus,shopping,transport,False
+Beli kopi starling,shopping,food,False
+Bayar biaya kuliah semester 5,shopping,education,False
+Kirim uang ke ibu,shopping,transfer,False
+Bayar premi asuransi prudentian,bills,healthcare,False
+konser itzy,travel,entertainment,False
+nonton 510 di jakarta,travel,entertainment,False
+nonton itzy di jakarta,travel,entertainment,False
+Bayar tiket bus ke Bandung,shopping,travel,False
+Bayar listrik rumah,shopping,bills,False
+Bayar ongkos ojek online ke kampus,shopping,transport,False
+Beli tiket konser musik,shopping,entertainment,False
+Bayar biaya pemeriksaan di rumah sakit,shopping,healthcare,False
+Beli reksa dana untuk investasi,shopping,investment,False
+Beli gulali dan cenil,shopping,food,False
+Beli merch 510,entertainment,shopping,False
+Beli merch extrememerch,entertainment,shopping,False
+Donasi untuk korban bencana,shopping,donation,False
+nonton konser,entertainment,entertainment,True
+laundry baju,shopping,bills,False
+reparasi ac,transport,bills,False
+beli kamera,healthcare,shopping,False
+beli tv,healthcare,shopping,False
+beli ikan hias dan akuarium,healthcare,shopping,False
+beli setrika dan kulkas,healthcare,shopping,False
+beli album origin 510,healthcare,shopping,False
+beli album BMTH nexgen,healthcare,shopping,False
+beli album spiritual 510,healthcare,shopping,False
+Bayar uang sekolah adik,education,education,True
+beli kado ultah,healthcare,shopping,False
+beli kipas angin,shopping,shopping,True
+beli motor,transport,shopping,False
+beli buku paket,education,shopping,False

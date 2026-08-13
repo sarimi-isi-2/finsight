@@ -1,0 +1,13 @@
+Label,Encoded
+bills,0
+education,1
+entertainment,2
+food,3
+healthcare,4
+income,5
+investment,6
+loan,7
+other,8
+shopping,9
+transport,10
+travel,11

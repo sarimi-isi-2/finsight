@@ -1,0 +1,210 @@
+text,label
+Naik MRT Jakarta,transport
+Naik KRL Commuter Line,transport
+Naik TransJakarta Koridor 1,transport
+Naik LRT Jabodebek,transport
+Naik Bus DAMRI Bandara,transport
+Naik angkot,transport
+Naik ojek pangkalan,transport
+Naik taksi Blue Bird,transport
+Naik GrabBike,transport
+Naik GoRide,transport
+Isi saldo e-money Mandiri,transport
+Isi saldo Flazz BCA,transport
+Isi saldo Brizzi BRI,transport
+Isi saldo TapCash BNI,transport
+Top up kartu MRT,transport
+Top up kartu KRL,transport
+Bayar parkir motor,transport
+Bayar parkir mobil,transport
+Parkir mall,transport
+Parkir stasiun,transport
+Parkir bandara,transport
+Bayar tol JORR,transport
+Bayar tol Cipularang,transport
+Bayar tol Jagorawi,transport
+Isi bensin Pertamina,transport
+Isi bensin Shell,transport
+Isi bensin BP AKR,transport
+Isi bensin Vivo,transport
+Servis motor Honda,transport
+Servis motor Yamaha,transport
+Servis mobil Toyota,transport
+Ganti oli motor,transport
+Ganti ban mobil,transport
+Cuci mobil,transport
+Cuci motor,transport
+Beli tiket MRT,transport
+Beli tiket KRL,transport
+Beli tiket Busway,transport
+Beli tiket DAMRI,transport
+Naik shuttle kampus,transport
+Naik bus kota,transport
+Naik mikrotrans,transport
+Bayar terminal,transport
+Parkir kampus,transport
+Parkir kantor,transport
+Isi e-Toll Mandiri,transport
+Isi e-Toll BCA,transport
+Isi e-Toll BNI,transport
+Isi e-Toll BRI,transport
+Bayar ferry penyeberangan,transport
+Naik kapal penyebrangan,transport
+Naik speedboat lokal,transport
+Naik becak,transport
+Naik delman,transport
+Naik bajaj,transport
+Naik ojek online,transport
+Pesan GrabCar,transport
+Pesan GoCar,transport
+Pesan Maxim,transport
+Pesan InDrive,transport
+Isi solar mobil,transport
+Isi Pertamax Turbo,transport
+Isi Pertalite,transport
+Isi Dexlite,transport
+Isi BBM kendaraan,transport
+Bayar parkir hotel,transport
+Bayar parkir apartemen,transport
+Biaya derek kendaraan,transport
+Biaya towing mobil,transport
+Servis rem mobil,transport
+Servis AC mobil,transport
+Ganti aki mobil,transport
+Isi angin nitrogen ban,transport
+Tambal ban motor,transport
+Tambal ban mobil,transport
+Spooring balancing,transport
+Ganti kampas rem,transport
+Naik bus AKAP,transport
+Naik bus wisata,transport
+Naik travel shuttle,transport
+Bayar penitipan motor,transport
+Bayar penitipan mobil,transport
+Isi saldo JakCard,transport
+Isi saldo MultiTrip KAI,transport
+Bayar parkir rumah sakit,transport
+Bayar parkir minimarket,transport
+Naik kereta bandara,transport
+Naik kereta lokal,transport
+Naik bus sekolah,transport
+Naik kendaraan umum,transport
+Sewa sepeda listrik,transport
+Sewa skuter listrik,transport
+Isi saldo kartu transportasi,transport
+Biaya uji KIR kendaraan,transport
+Perpanjang STNK kendaraan,transport
+Bayar pajak kendaraan,transport
+Bayar parkir valet,transport
+Naik feeder bus,transport
+Bayar retribusi parkir,transport
+Naik taksi online,transport
+Top up gojek saldo buat transport,transport
+Top up grab buat naik mobil,transport
+Naik bus TransJogja,transport
+Naik bus TransSemarang,transport
+Naik bus TransBandung,transport
+Naik bus TransJakarta,transport
+Naik ojek,transport
+Naik bentor,transport
+Naik andong,transport
+Bayar parkir meteran,transport
+Bayar parkir basement,transport
+Parkir gedung perkantoran,transport
+Parkir mal,transport
+Parkir ruko,transport
+Isi e-money kartu uang elektronik,transport
+Isi flazz untuk transportasi,transport
+Isi Brizzi buat naik kereta,transport
+Top up tapcash bni,transport
+Bayar tol dalam kota,transport
+Bayar tol luar kota,transport
+Bayar tol jembatan,transport
+Isi bensin motor,transport
+Isi bensin mobil,transport
+Isi pertalite,transport
+Isi pertamax,transport
+Isi dex,transport
+Bayar bensin subsidi,transport
+Bayar bensin non subsidi,transport
+Service berkala motor,transport
+Service berkala mobil,transport
+Ganti oli mesin,transport
+Ganti oli gardan,transport
+Ganti busi motor,transport
+Ganti busi mobil,transport
+Ganti filter udara,transport
+Ganti filter oli,transport
+Ganti timing belt,transport
+Ganti water pump,transport
+Ganti kampas kopling,transport
+Cuci motor steam,transport
+Cuci mobil steam,transport
+Cuci mobil salon,transport
+Cuci motor salon,transport
+Naik becak motor,transport
+Naik bemo,transport
+Naik mikrolet,transport
+Naik metromini,transport
+Naik kopaja,transport
+Naik patas,transport
+Naik bus malam,transport
+Naik bus primajasa,transport
+Naik bus lorena,transport
+Naik bus als,transport
+Naik bus maju lancar,transport
+Naik bus pandawa,transport
+Sewa mobil harian,transport
+Sewa motor harian,transport
+Sewa bus pariwisata,transport
+Sewa mobil dengan supir,transport
+Sewa motor tanpa supir,transport
+Isi saldo mrt,transport
+Isi saldo lrt,transport
+Isi saldo krl,transport
+Naik kereta ekonomi,transport
+Naik kereta bisnis,transport
+Naik kereta eksekutif,transport
+Beli tiket pesawat online,transport
+Beli tiket kereta online,transport
+Beli tiket bus online,transport
+Bayar tiket pesawat,transport
+Bayar tiket kereta,transport
+Bayar tiket kapal,transport
+Naik pesawat garuda,transport
+Naik pesawat lion air,transport
+Naik pesawat citilink,transport
+Naik pesawat batik air,transport
+Naik pesawat super air jet,transport
+Naik pesawat air asia,transport
+Naik speedboat,transport
+Naik kapal ferry,transport
+Naik kapal cepat,transport
+Naik kapal lambat,transport
+Parkir airport,transport
+Parkir stasiun kereta,transport
+Parkir terminal bus,transport
+Parkir pelabuhan,transport
+Isi saldo e-toll,transport
+Isi saldo e-money bca,transport
+Isi saldo e-money mandiri,transport
+Isi saldo e-money bni,transport
+Isi saldo e-money bri,transport
+Perpanjang pajak motor,transport
+Perpanjang pajak mobil,transport
+Bayar pajak motor online,transport
+Bayar pajak mobil online,transport
+Bayar pajak STNK,transport
+Bayar plat nomor kendaraan,transport
+Bayar kir kendaraan,transport
+Perpanjang kir,transport
+Bayar pengesahan STNK,transport
+Bayar denda pajak kendaraan,transport
+Bayar denda STNK,transport
+Bayar ganti plat nomor,transport
+Bayar mutasi kendaraan,transport
+Bayar balik nama kendaraan,transport
+Naik bus antarkota,transport
+Naik bus pariwisata,transport
+Naik travel antar jemput,transport
+Naik travel online,transport

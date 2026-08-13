@@ -69,3 +69,6 @@ generated
 *.launch
 .settings/
 *.sublime-workspace
+
+# AI Service datasets
+apps/ai-service/data/raw/
