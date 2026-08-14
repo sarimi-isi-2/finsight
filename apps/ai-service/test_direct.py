@@ -10,6 +10,13 @@ texts = [
     "Payroll",
     "Payroll July Rp8200000",
     "Potongan admin payroll",
+    "beli permen",
+    "beli es krim",
+    "beli coklat",
+    "beli snack",
+    "beli makanan ringan",
+    "beli wafer",
+    "beli jajanan"
 ]
 
 

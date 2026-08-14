@@ -2679,10 +2679,8 @@ Beli obat di apotek,healthcare
 Check up kesehatan tahunan,healthcare
 Bayar BPJS Kesehatan,healthcare
 Konsultasi gigi,healthcare
-Beli vitamin dan suplemen,healthcare
 Bayar rawat inap rumah sakit,healthcare
 Konsultasi psikolog,healthcare
-Beli obat resep dokter,healthcare
 Cek golongan darah,healthcare
 Vaksinasi Covid-19,healthcare
 Konsultasi spesialis mata,healthcare
@@ -2717,7 +2715,6 @@ Beli obat ginjal,healthcare
 Cek fungsi hati,healthcare
 Cek fungsi paru-paru,healthcare
 Konsultasi paru,healthcare
-Beli obat asma,healthcare
 Bayar terapi pernapasan,healthcare
 Konsultasi kanker,healthcare
 Beli obat kemoterapi,healthcare
@@ -2726,44 +2723,22 @@ Bayar CT Scan,healthcare
 Bayar USG,healthcare
 Bayar EKG,healthcare
 Bayar EEG,healthcare
-Beli alat cek tekanan darah,healthcare
-Beli alat cek gula darah,healthcare
-Beli termometer,healthcare
-Beli masker medis,healthcare
-Beli hand sanitizer medis,healthcare
-Bayar dokter hewan,healthcare
-Beli obat hewan,healthcare
 Vaksinasi hewan peliharaan,healthcare
 Konsultasi dokter mata,healthcare
-Beli lensa kontak,healthcare
 Bayar periksa telinga,healthcare
-Beli alat bantu dengar,healthcare
 Konsultasi dokter saraf,healthcare
-Beli obat saraf,healthcare
 Bayar terapi saraf,healthcare
 Konsultasi dokter bedah,healthcare
 Bayar biaya kamar rumah sakit,healthcare
-Beli obat maag,healthcare
-Beli obat sakit kepala,healthcare
-Beli obat demam,healthcare
-Beli obat flu,healthcare
 Konsultasi dokter anak,healthcare
-Beli obat cacingan,healthcare
-Beli obat diare,healthcare
-Beli obat sembelit,healthcare
 Konsultasi dokter kandungan,healthcare
-Beli obat KB,healthcare
 Bayar tes kehamilan,healthcare
 Konsultasi infertilitas,healthcare
-Beli obat penambah darah,healthcare
-Beli obat osteoporosis,healthcare
 Konsultasi reumatologi,healthcare
 Beli obat sendi,healthcare
 Bayar terapi fisik,healthcare
 Beli alat pijat,healthcare
 Konsultasi estetika,healthcare
-Beli skincare medis,healthcare
-Beli sunscreen medis,healthcare
 Bayar treatment wajah medis,healthcare
 Konsultasi kedokteran olahraga,healthcare
 Beli obat cedera olahraga,healthcare
@@ -2775,8 +2750,6 @@ Bayar perawatan paliatif,healthcare
 Konsultasi geriatri,healthcare
 Beli obat lansia,healthcare
 Bayar perawatan lansia,healthcare
-Beli alat bantu jalan,healthcare
-Beli kursi roda,healthcare
 Bayar perawat home care,healthcare
 Konsultasi gizi anak,healthcare
 Beli obat cacing,healthcare
@@ -2784,23 +2757,10 @@ Bayar imunisasi polio,healthcare
 Bayar imunisasi hepatitis,healthcare
 Bayar imunisasi DPT,healthcare
 Bayar imunisasi MMR,healthcare
-Beli vitamin D,healthcare
-Beli vitamin B kompleks,healthcare
-Beli vitamin E,healthcare
-Beli suplemen kalsium,healthcare
-Beli suplemen zat besi,healthcare
-Beli suplemen omega 3,healthcare
-Beli suplemen protein,healthcare
 Konsultasi dokter kulit dan kelamin,healthcare
-Beli obat jerawat,healthcare
-Beli obat kadas,healthcare
-Beli obat panu,healthcare
 Bayar perawatan eksim,healthcare
 Konsultasi mata minus,healthcare
-Beli obat tetes mata,healthcare
-Beli obat tetes telinga,healthcare
 Konsultasi THT spesialis,healthcare
-Beli obat hidung tersumbat,healthcare
 Bayar periksa telinga dalam,healthcare
 Konsultasi gigi anak,healthcare
 Bayar cabut gigi,healthcare
@@ -2808,8 +2768,6 @@ Bayar tambal gigi,healthcare
 Bayar behel gigi,healthcare
 Bayar scaling gigi,healthcare
 Bayar pemutihan gigi,healthcare
-Beli obat sakit gigi,healthcare
-Beli pasta gigi medis,healthcare
 Konsultasi jantung,healthcare
 Beli obat jantung koroner,healthcare
 Bayar periksa EKG,healthcare
@@ -2838,12 +2796,6 @@ Konsultasi homeopati,healthcare
 Beli obat homeopati,healthcare
 Bayar refleksi,healthcare
 Konsultasi naturopati,healthcare
-Beli obat naturopati,healthcare
-Bayar terapi oksigen,healthcare
-Beli tabung oksigen,healthcare
-Beli nebulizer,healthcare
-Beli oximeter,healthcare
-Beli stetoskop,healthcare
 Beli tensimeter,healthcare
 Beli timbangan digital,healthcare
 Beli alat tes urine,healthcare
@@ -3426,16 +3378,6 @@ Vaksin DPT,healthcare
 Imunisasi anak,healthcare
 Vaksin flu,healthcare
 Beli suplemen zinc,healthcare
-Beli obat batuk,healthcare
-Beli salep kulit,healthcare
-Beli plester,healthcare
-Beli perban,healthcare
-Beli kasa steril,healthcare
-Beli alkohol 70%,healthcare
-Beli handsanitizer,healthcare
-Beli termometer digital,healthcare
-Beli strip tes gula,healthcare
-Beli jamu tradisional,healthcare
 Konsultasi online dokter,healthcare
 Telemedicine dengan dokter,healthcare
 Chat dokter di aplikasi,healthcare
@@ -3458,13 +3400,6 @@ Tes feses,healthcare
 Tes alergi,healthcare
 Tes DNA,healthcare
 Beli antibiotik,healthcare
-Beli obat penurun panas,healthcare
-Beli obat nyeri sendi,healthcare
-Beli obat otot,healthcare
-Beli koyo,healthcare
-Beli minyak angin,healthcare
-Beli balsem,healthcare
-Beli inhaler asma,healthcare
 Cek KB di bidan,healthcare
 Pasang IUD,healthcare
 Konsultasi KB,healthcare
@@ -3493,20 +3428,6 @@ Periksa tenggorokan,healthcare
 Endoskopi,healthcare
 Kolonskopi,healthcare
 Bronkoskopi,healthcare
-Beli susu khusus kesehatan,healthcare
-Beli makanan kesehatan,healthcare
-Beli madu,healthcare
-Beli propolis,healthcare
-Beli echinacea,healthcare
-Beli minyak ikan,healthcare
-Beli kalsium,healthcare
-Beli zat besi,healthcare
-Beli magnesium,healthcare
-Beli probiotics,healthcare
-Beli kolagen,healthcare
-Beli serum wajah,healthcare
-Beli tabir surya,healthcare
-Beli pelembab kulit,healthcare
 Konsultasi dermatologi,healthcare
 Periksa jerawat,healthcare
 Perawatan jerawat,healthcare
@@ -3959,3 +3880,163 @@ beli album origin 510,shopping
 beli album BMTH nexgen,shopping
 beli album spiritual 510,shopping
 beli kado ultah,shopping
+beli motor,shopping
+beli buku paket,shopping
+beli gesper,shopping
+beli bunga mawar,shopping
+beli bunga tulip,shopping
+beli dasi,shopping
+beli gaun,shopping
+beli kemeja,shopping
+beli kaos,shopping
+beli permen,shopping
+beli kaos kaki,shopping
+beli sandal,shopping
+beli sepatu baru,shopping
+beli tas kuliah,shopping
+beli dompet,shopping
+beli topi,shopping
+beli jaket,shopping
+beli celana jeans,shopping
+beli hoodie,shopping
+beli jam tangan,shopping
+beli parfum,shopping
+beli casing hp,shopping
+beli charger hp,shopping
+beli kabel data,shopping
+beli mouse wireless,shopping
+beli keyboard,shopping
+beli flashdisk,shopping
+beli harddisk eksternal,shopping
+beli powerbank,shopping
+beli earphone,shopping
+beli headset,shopping
+beli monitor baru,shopping
+beli printer,shopping
+beli lampu meja,shopping
+beli sprei baru,shopping
+beli bantal,shopping
+beli selimut,shopping
+beli handuk,shopping
+beli piring baru,shopping
+beli gelas baru,shopping
+beli sendok dan garpu,shopping
+beli wajan,shopping
+beli rice cooker,shopping
+beli blender,shopping
+beli kipas meja,shopping
+beli rak buku,shopping
+beli meja baru,shopping
+beli kursi kantor,shopping
+beli boneka,shopping
+beli mainan anak,shopping
+beli hadiah ulang tahun,shopping
+beli bunga,shopping
+beli kacamata hitam,shopping
+beli sandal jepit,shopping
+beli baju baru,shopping
+beli rok baru,shopping
+beli pakaian olahraga,shopping
+beli perlengkapan rumah,shopping
+beli barang di Shopee,shopping
+beli barang di Tokopedia,shopping
+beli nasi uduk,food
+beli nasi kuning,food
+beli nasi padang,food
+beli nasi goreng,food
+beli mie ayam,food
+beli mie goreng,food
+beli bakso,food
+beli sate ayam,food
+beli sate kambing,food
+beli ayam geprek,food
+beli ayam bakar,food
+beli ayam goreng,food
+beli ikan bakar,food
+beli pecel lele,food
+beli soto ayam,food
+beli soto betawi,food
+beli gado gado,food
+beli ketoprak,food
+beli siomay,food
+beli batagor,food
+beli martabak,food
+beli roti,food
+beli donat,food
+beli kue,food
+beli pizza,food
+beli burger,food
+beli kentang goreng,food
+beli fried chicken,food
+beli es teh,food
+beli kopi,food
+beli es kopi,food
+beli jus jeruk,food
+beli jus alpukat,food
+beli susu,food
+beli teh botol,food
+beli minuman dingin,food
+beli cemilan,food
+beli jajanan,food
+beli makanan ringan,food
+beli snack,food
+beli wafer,food
+beli permen,food
+beli coklat,food
+beli es krim,food
+beli puding,food
+beli buah potong,food
+pesan nasi goreng,food
+pesan ayam geprek,food
+pesan makanan lewat GoFood,food
+pesan makanan lewat GrabFood,food
+Beli bubur ayam,food
+Beli lontong sayur,food
+Beli nasi uduk,food
+Beli nasi kuning,food
+Beli nasi padang,food
+Beli nasi campur,food
+Beli mie ayam,food
+Beli mie goreng,food
+Beli kwetiau goreng,food
+Beli bihun goreng,food
+Beli bakso,food
+Beli siomay,food
+Beli batagor,food
+Beli cilok,food
+Beli cireng,food
+Beli martabak manis,food
+Beli martabak telur,food
+Beli roti bakar,food
+Beli donat,food
+Beli pisang goreng,food
+Beli kentang goreng,food
+Beli burger,food
+Beli ayam geprek,food
+Beli ayam bakar,food
+Beli sate ayam,food
+Beli soto ayam,food
+Beli gado-gado,food
+Beli ketoprak,food
+Beli es krim,food
+Beli permen,food
+Beli donat,food
+Beli donat coklat,food
+Beli donat gula,food
+Beli kerupuk,food
+Beli kerupuk udang,food
+Beli kerupuk ikan,food
+Beli biskuit,food
+Beli biskuit coklat,food
+Beli biskuit susu,food
+Beli wafer,food
+Beli wafer coklat,food
+Beli snack,food
+Beli snack kentang,food
+Beli makanan ringan,food
+Beli jajanan,food
+Beli permen,food
+Beli es krim,food
+Beli coklat,food
+Beli kue,food
+Beli bolu,food
